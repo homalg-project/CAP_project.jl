@@ -94,9 +94,35 @@ end
 	
 end );
 
-function Zero(R::Union{typeof(Integers), typeof(Rationals)})
-	zero(R)
+function Zero(R::Nemo.Ring)
+	Nemo.zero(R)
 end
+
+global const ZeroImmutable = Zero
+
+function One(R::Nemo.Ring)
+	Nemo.one(R)
+end
+
+global const OneImmutable = One
+
+function IdentityMat(n::Union{Int64,BigInt}, R::Nemo.Ring)
+	map(i -> map(j-> i==j ? Nemo.one(R) : Nemo.zero(R), 1:n), 1:n)
+end
+
+function MinusOne(R::Nemo.Ring)
+	-Nemo.one(R)
+end
+
+function Inverse(elem::AbstractAlgebra.NCRingElement)
+	AbstractAlgebra.inv(elem)
+end
+
+function AdditiveInverse(elem::AbstractAlgebra.NCRingElement)
+  -elem
+end
+
+global const AdditiveInverseSameMutability = AdditiveInverse
 
 function /(elem::AbstractAlgebra.NCRingElement, ::typeof(Integers))
 	Nemo.ZZ(BigInt(elem))

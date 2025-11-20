@@ -342,6 +342,11 @@ function RecNames(obj::CAPDict)
 	sort([string(key) for key in keys(dict)])
 end
 
+function InfoOfObject(obj::CAPDict)
+  dict = getfield(obj, :dict)
+  first(dict, length(dict))
+end
+
 function ==(rec1::CAPRecord, rec2::CAPRecord)
 	RecNames( rec1 ) == RecNames( rec2 ) && ForAll(RecNames(rec1), name -> rec1[name] == rec2[name])
 end
@@ -370,6 +375,9 @@ include("gap_emulation/rings.jl")
 # sets
 include("gap_emulation/sets.jl")
 
+# lazy h-vectors
+include("gap_emulation/lazy_h_vectors.jl")
+
 # CAP state
 include("gap_emulation/CAP_state.jl")
 
@@ -379,6 +387,7 @@ global const IsObject = Filter("IsObject", Any)
 global const IsString = Filter("IsString", AbstractString)
 global const IsStringRep = IsString
 global const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange, Tuple})
+global const IsLazyHList = Filter( "IsLazyHList", LazyHVector )
 global const IsDenseList = IsList
 global const IsFunction = Filter("IsFunction", Function)
 global const IsOperation = IsFunction
@@ -793,6 +802,12 @@ function REM_INT(a::Union{Int, BigInt}, b::Union{Int, BigInt})
 	a % b
 end
 
+function Log2Int(a::Union{Int, BigInt})
+	trunc(Int, log2(a))
+end
+
+global const AbsInt = abs
+
 function Cartesian(args...)
 	if length(args) == 1
 		args = args[1]
@@ -804,6 +819,8 @@ end
 @DeclareAttribute( "Length", IsAttributeStoringRep )
 
 @InstallMethod( Length, [ IsString ], length );
+
+@InstallMethod( Length, [ IsLazyHList ], length );
 
 @InstallMethod( Length, [ IsList ],
 	function ( list )
@@ -899,6 +916,10 @@ function ListOp(list::Union{Vector, UnitRange, StepRange, Tuple}, func)
 	map(func, list)
 end
 
+function ListOp(list::LazyHVector, func)
+	LazyHVector(list, func)
+end
+
 function ListOp end
 
 function List(obj, func)
@@ -910,6 +931,12 @@ function ListN(args...)
 	lists = args[1:end-1]
 	@assert ForAll( lists, l -> length(l) == length(lists[1]) )
 	map(x -> f(x...), zip(lists...))
+end
+
+function ListX(args...)
+	f = args[end]
+	lists = args[1:end-1]
+	map(x -> f(x...), Cartesian(lists...))
 end
 
 ForAll(list, func) = all(func, list)
@@ -933,7 +960,10 @@ function Filtered(list::Any, func)
 	FilteredOp(list, func)
 end
 
-global const LazyHList = ListOp
+import Base: +
++(a::Union{Int64, BigInt}, b::Vector) = map(x -> a+x, b)
+
+global const LazyHList = LazyHVector
 
 function UnorderedTuples(v::Vector{T}, k::Union{Int,BigInt}) where T
 	result = Vector{Vector{T}}()
@@ -1031,8 +1061,8 @@ function SplitString(str::String, sep::String)
 	map(x -> string(x), split(str, sep))
 end
 
-function Position(list::Vector, element::Any)
-	pos = findfirst(x -> x == element, list)
+function Position(list::Union{Vector, String}, element::Any)
+  pos = findfirst(isequal(element), list)
 	if isnothing(pos)
 		fail
 	else
@@ -1047,6 +1077,8 @@ function Position(list::UnitRange, element::Any)
 		fail
 	end
 end
+
+global const PositionSorted = searchsortedfirst
 
 function Error(args...)
 	error(string(args...))
@@ -1066,11 +1098,11 @@ function EndsWith(string::String, substring::String)
 	endswith(string, substring)
 end
 
-function IsMatchingList(string::String, substring::String, start::Union{Int,BigInt})
+function IsMatchingSublist(string::String, substring::String, start::Union{Int,BigInt})
 	startswith(string[start:end], substring)
 end
 
-function IsMatchingList(list::Vector, sublist::Vector, start::Union{Int,BigInt})
+function IsMatchingSublist(list::Vector, sublist::Vector, start::Union{Int,BigInt})
 	StartsWith(list[start:end], sublist)
 end
 
@@ -1115,6 +1147,19 @@ end
 
 function Random(v::AbstractVector)
 	rand(v)
+end
+
+function Random(m::Union{Int64, BigInt}, n::Union{Int64, BigInt})
+	rand(m:n)
+end
+
+function Shuffle(v::AbstractVector)
+	n = length(v)
+	for i in n:-1:2
+		j = rand(1:i)
+		v[i], v[j] = v[j], v[i]
+	end
+	return v
 end
 
 function IsPackageMarkedForLoading( name, version )
@@ -1299,6 +1344,20 @@ function TransposedMat(M)
 	else
 		[[M[j][i] for j=1:length(M)] for i=1:length(M[1])];
 	end
+end
+
+function KroneckerProduct(mat1::Vector{Vector{T}}, mat2::Vector{Vector{T}}) where T
+	kroneckerproduct = Vector{Vector{T}}()
+	for row1 in mat1
+		for row2 in mat2
+			row = Vector{T}()
+			for i  in row1
+				append!( row, i * row2 )
+			end
+		push!( kroneckerproduct, row )
+		end
+	end
+	kroneckerproduct;
 end
 
 struct PermList

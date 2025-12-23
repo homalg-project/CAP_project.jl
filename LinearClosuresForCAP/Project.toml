@@ -6,8 +6,8 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's LinearClosuresForCAP v2025.11-01
-version = "0.1.2"
+# Transpiled from GAP's LinearClosuresForCAP v2025.12-01
+version = "0.1.3"
 
 [deps]
 CAP = "d64df2ee-d2bb-46f4-8cbc-f03bb858f8cb"

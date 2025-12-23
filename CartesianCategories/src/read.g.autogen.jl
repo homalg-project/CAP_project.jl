@@ -11,6 +11,7 @@ include( "gap/Tools.gi.autogen.jl" );
 ## Initial category
 
 include( "gap/InitialCategory.gi.autogen.jl" );
+include( "gap/InitialCategoryDerivedMethods.gi.autogen.jl" );
 
 ## Cartesian and Cocartesian
 

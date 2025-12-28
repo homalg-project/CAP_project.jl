@@ -22,6 +22,12 @@ julia> n = FinSet( 3 );
 
 julia> k = FinSet( 4 );
 
+julia> Cardinality( m )
+2
+
+julia> Length( m )
+2
+
 julia> Display( List( AsList( ProjectionInFactorOfDirectProduct( [ M, N, K ], 1 ) ), i -> i[2] ) )
 [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ]
 

@@ -2047,7 +2047,7 @@ true
 julia> ImageObject( phi )
 |2|
 
-julia> Length( ImageObject( phi ) )
+julia> Cardinality( ImageObject( phi ) )
 2
 
 julia> s = FinSet( 2 )
@@ -2056,7 +2056,7 @@ julia> s = FinSet( 2 )
 julia> I = ImageObject( phi, s )
 |2|
 
-julia> Length( I )
+julia> Cardinality( I )
 2
 
 ```
@@ -2684,7 +2684,7 @@ false
 julia> k = FinSet( 100000 )
 |100000|
 
-julia> h = ListWithIdenticalEntries( Length( k ) - 3, 2 );
+julia> h = ListWithIdenticalEntries( Cardinality( k ) - 3, 2 );
 
 julia> h = @Concatenation( h, [ 1, 0, 1 ] );
 

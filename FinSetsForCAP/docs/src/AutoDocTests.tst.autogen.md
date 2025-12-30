@@ -2224,6 +2224,9 @@ julia> P = Preimage( phi, AsList( FinSet( 5 ) ) );
 julia> Display( P )
 [ 1, 2 ]
 
+julia> List( P, phi ) == [ 4, 4 ]
+true
+
 ```
 
 ```jldoctest AutoDocTests

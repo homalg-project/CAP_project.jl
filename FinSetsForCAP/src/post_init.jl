@@ -1,8 +1,3 @@
-##
-function BoolToBigInt(b::Bool)
-    BigInt(b)
-end
-
 # Iterator in FinSets
 function iterate(M::IsObjectInCategoryOfFiniteSets.abstract_type)
 	iterate( AsList( M ) )

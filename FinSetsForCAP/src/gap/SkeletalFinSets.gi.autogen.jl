@@ -185,15 +185,26 @@ end );
 
 ##
 @InstallMethod( Preimage,
-        "for a CAP map of skeletal finite sets and a CAP skeletal finite set",
+        "for two lists",
+        [ IsList, IsList ],
+        
+  function ( images, t )
+    local positions;
+    
+    positions = PositionsProperty( images, x -> x in t );
+    
+    return List( positions, i -> BigInt( -1 + i ) );
+    
+end );
+
+##
+@InstallMethod( Preimage,
+        "for a CAP map of skeletal finite sets and a list",
         [ IsMorphismInSkeletalCategoryOfFiniteSets, IsList ],
         
   function ( phi, t )
-    local positions;
     
-    positions = PositionsProperty( AsList( phi ), x -> x in t );
-    
-    return List( positions, i -> BigInt( i - 1 ) );
+    return Preimage( AsList( phi ), t );
     
 end );
 
@@ -226,13 +237,13 @@ end );
   function ( s, D )
     local T, Cq, t, L, i;
     
-    T = AsList( s );
+    T = (0):(s - 1);
     
     Cq = [ ];
     
     while @not IsEmpty( T )
         t = T[1];
-        t = UnionGAP( List( D, f_j -> List( UnionGAP( List( D, f_i -> Preimage( f_i, [ t ] ) ) ), f_j ) ) );
+        t = UnionGAP( List( D, f_j -> f_j[1 + UnionGAP( List( D, f_i -> Preimage( f_i, [ t ] ) ) )] ) );
         if (IsEmpty( t ))
             t = [ T[1] ];
         end;
@@ -240,7 +251,7 @@ end );
         T = Difference( T, t );
     end;
     
-    T = AsList( s );
+    T = (0):(s - 1);
     
     if (@Concatenation( Cq ) != T)
         for t in T
@@ -258,7 +269,7 @@ end );
     end;
     
     return SetGAP( Cq );
-
+    
 end );
 
 ##
@@ -779,8 +790,8 @@ end );
 ##
 AddCoequalizer( SkeletalFinSets,
   function ( cat, s, D )
-  
-    return ObjectConstructor( cat, BigInt( Length( SKELETAL_FIN_SETS_ExplicitCoequalizer( s, D ) ) ) );
+    
+    return ObjectConstructor( cat, BigInt( Length( SKELETAL_FIN_SETS_ExplicitCoequalizer( Cardinality( s ), List( D, AsList ) ) ) ) );
     
 end );
 
@@ -789,7 +800,7 @@ AddProjectionOntoCoequalizerWithGivenCoequalizer( SkeletalFinSets,
   function ( cat, s, D, C )
     local Cq, cmp;
     
-    Cq = SKELETAL_FIN_SETS_ExplicitCoequalizer( s, D );
+    Cq = SKELETAL_FIN_SETS_ExplicitCoequalizer( Cardinality( s ), List( D, AsList ) );
     
     cmp = List( s, x -> -1 + BigInt( SafeUniquePositionProperty( Cq, c -> x in c ) ) );
     
@@ -802,8 +813,8 @@ AddUniversalMorphismFromCoequalizerWithGivenCoequalizer( SkeletalFinSets,
   function ( cat, s, D, test_object, tau, C )
     local Cq;
     
-    Cq = SKELETAL_FIN_SETS_ExplicitCoequalizer( s, D );
-
+    Cq = SKELETAL_FIN_SETS_ExplicitCoequalizer( Cardinality( s ), List( D, AsList ) );
+    
     return MorphismConstructor( cat, C, List( Cq, x -> AsList( tau )[1 + x[1]] ), Range( tau ) );
     
 end );

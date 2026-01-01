@@ -1565,6 +1565,110 @@ julia> using CAP, MonoidalCategories, CartesianCategories, Toposes, FinSetsForCA
 julia> true
 true
 
+julia> m = FinSet1( 7 )
+|7|
+
+julia> Display( m )
+[ 1,..., 7 ]
+
+julia> IsWellDefined( m )
+true
+
+julia> StringGAP( m )
+"FinSet( SkeletalFinSets1, 7 )"
+
+julia> Display( List( m, x -> x^2 ) )
+[ 1, 4, 9, 16, 25, 36, 49 ]
+
+julia> L = ObjectDatum( m )
+7
+
+julia> mm = ObjectConstructor( SkeletalFinSets1, BigInt( 7 ) )
+|7|
+
+julia> m == mm
+true
+
+julia> n = FinSet1( -2 )
+|-2|
+
+julia> IsWellDefined( n )
+false
+
+julia> n = FinSet1( 3 )
+|3|
+
+julia> IsWellDefined( n )
+true
+
+julia> p = FinSet1( 4 )
+|4|
+
+julia> IsWellDefined( p )
+true
+
+julia> IsEqualForObjects( m, n )
+false
+
+```
+
+```jldoctest AutoDocTests
+julia> using CAP, MonoidalCategories, CartesianCategories, Toposes, FinSetsForCAP
+
+julia> true
+true
+
+julia> s = FinSet1( 3 )
+|3|
+
+julia> t = FinSet1( 7 )
+|7|
+
+julia> phi = MapOfFinSets( s, [ 7, 5, 5 ], t )
+|3| → |7|
+
+julia> Display( AsList( phi ) )
+[ 7, 5, 5 ]
+
+julia> IsWellDefined( phi )
+true
+
+julia> Display( phi )
+[ 1, 2, 3 ] ⱶ[ 7, 5, 5 ]→ [ 1,..., 7 ]
+
+julia> StringGAP( phi )
+"MapOfFinSets( SkeletalFinSets1, FinSet( SkeletalFinSets1, 3 ), [ 7, 5, 5 ], FinSet( SkeletalFinSets1, 7 ) )"
+
+julia> s = ObjectConstructor( SkeletalFinSets1, BigInt( 3 ) )
+|3|
+
+julia> t = ObjectConstructor( SkeletalFinSets1, BigInt( 7 ) )
+|7|
+
+julia> phi = MorphismConstructor(
+            s,
+            [ BigInt( 7 ), BigInt( 5 ), BigInt( 5 ) ],
+            t
+        )
+|3| → |7|
+
+julia> Display( MorphismDatum( phi ) )
+[ 7, 5, 5 ]
+
+julia> IsWellDefined( phi )
+true
+
+julia> Display( phi )
+[ 1, 2, 3 ] ⱶ[ 7, 5, 5 ]→ [ 1,..., 7 ]
+
+```
+
+```jldoctest AutoDocTests
+julia> using CAP, MonoidalCategories, CartesianCategories, Toposes, FinSetsForCAP
+
+julia> true
+true
+
 julia> L = FinSet1( 0 )
 |0|
 

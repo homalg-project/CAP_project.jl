@@ -8,9 +8,13 @@ include( "gap/Tools.gi.autogen.jl" );
 
 include( "gap/precompiled_categories/SkeletalCategoryOfFiniteSetsWithMorphismsGivenByLists_precompiled.gi.autogen.jl" );
 
+include( "gap/precompiled_categories/SkeletalCategoryOfFiniteSetsWithMorphismsGivenByListsAndCountingStartingAt1_precompiled.gi.autogen.jl" );
+
 include( "gap/FinSets.gi.autogen.jl" );
 
 include( "gap/SkeletalFinSets.gi.autogen.jl" );
+
+include( "gap/SkeletalFinSetsWithCountingStartingAt1.gi.autogen.jl" );
 
 #= comment for Julia
 if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ) then

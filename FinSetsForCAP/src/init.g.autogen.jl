@@ -10,6 +10,8 @@ include( "gap/FinSets.gd.autogen.jl" );
 
 include( "gap/SkeletalFinSets.gd.autogen.jl" );
 
+include( "gap/SkeletalFinSetsWithCountingStartingAt1.gd.autogen.jl" );
+
 #= comment for Julia
 if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ) then
     # COVERAGE_IGNORE_NEXT_LINE

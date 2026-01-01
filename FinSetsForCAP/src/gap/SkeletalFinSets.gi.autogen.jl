@@ -112,6 +112,7 @@ end ) );
 
 ##
 @InstallMethod( FinSetOp,
+        "for a skeletal category of finite sets and a nonnegative integer",
         [ IsSkeletalCategoryOfFiniteSets, IsBigInt ],
         
   function ( cat, n )
@@ -121,8 +122,19 @@ end ) );
 end );
 
 ##
+@InstallMethod( FinSet,
+        "for a nonnegative integer",
+        [ IsBigInt ],
+        
+  function ( n )
+    
+    return FinSet( SkeletalFinSets, n );
+    
+end );
+
+##
 @InstallMethod( AsList,
-        "for a CAP skeletal finite set",
+        "for an object in a skeletal category of finite sets",
         [ IsObjectInSkeletalCategoryOfFiniteSets ],
         
   function ( s )
@@ -133,7 +145,7 @@ end );
 
 ##
 @InstallMethod( ListOp,
-        "for a CAP skeletal finite set and a function",
+        "for an object in a skeletal category of finite sets and a function",
         [ IsObjectInSkeletalCategoryOfFiniteSets, IsFunction ],
         
   function ( s, f )
@@ -146,7 +158,7 @@ end );
 
 ##
 @InstallMethod( MapOfFinSets,
-        "for two CAP skeletal finite sets and a list",
+        "for two objects in a skeletal category of finite sets and a list",
         [ IsObjectInSkeletalCategoryOfFiniteSets, IsList, IsObjectInSkeletalCategoryOfFiniteSets ],
         
   function ( s, G, t )
@@ -157,7 +169,7 @@ end );
 
 ##
 @InstallMethod( MapOfFinSets,
-        "for a skeletal category of finite sets, two CAP skeletal finite sets and a list",
+        "for a skeletal category of finite sets, two objects therein and a list",
         [ IsSkeletalCategoryOfFiniteSets, IsObjectInSkeletalCategoryOfFiniteSets, IsList, IsObjectInSkeletalCategoryOfFiniteSets ],
         
   function ( cat, s, G, t )
@@ -168,7 +180,7 @@ end );
 
 ##
 @InstallMethod( EmbeddingOfFinSets,
-        "for two CAP skeletal finite sets",
+        "for two objects in a skeletal category of finite sets",
         [ IsObjectInSkeletalCategoryOfFiniteSets, IsObjectInSkeletalCategoryOfFiniteSets ],
         
   function ( s, t )
@@ -199,7 +211,7 @@ end );
 
 ##
 @InstallMethod( Preimage,
-        "for a CAP map of skeletal finite sets and a list",
+        "for a morphism in a skeletal category of finite sets and a list",
         [ IsMorphismInSkeletalCategoryOfFiniteSets, IsList ],
         
   function ( phi, t )
@@ -210,18 +222,19 @@ end );
 
 ##
 @InstallMethod( ImageObject,
-     "for a CAP map of skeletal finite sets and a CAP skeletal finite set",
-     [ IsMorphismInSkeletalCategoryOfFiniteSets, IsObjectInSkeletalCategoryOfFiniteSets ],
-      function ( phi, s_ )
-
+        "for a morphism and an object in a skeletal category of finite sets",
+        [ IsMorphismInSkeletalCategoryOfFiniteSets, IsObjectInSkeletalCategoryOfFiniteSets ],
+        
+  function ( phi, s_ )
+    
     return ImageObject( PreCompose( EmbeddingOfFinSets( s_, Source( phi ) ), phi ) );
-
+    
 end );
 
 ##
 @InstallMethod( CallFuncList,
-        "for a CAP map of skeletal finite sets and a list",
-    [ IsMorphismInSkeletalCategoryOfFiniteSets, IsList ],
+        "for a morphism in a skeletal category of finite sets and a list",
+        [ IsMorphismInSkeletalCategoryOfFiniteSets, IsList ],
         
   function ( phi, L )
     local x;
@@ -358,7 +371,12 @@ end );
 
 ##
 AddIsWellDefinedForObjects( SkeletalFinSets,
-   ( cat, n ) -> IsBigInt( Cardinality( n ) ) && Cardinality( n ) >= 0 );
+  function ( cat, n )
+    
+    return IsBigInt( Cardinality( n ) ) &&
+           Cardinality( n ) >= 0;
+    
+end );
 
 ##
 AddIsEqualForObjects( SkeletalFinSets,
@@ -379,16 +397,9 @@ AddIsWellDefinedForMorphisms( SkeletalFinSets,
     
     t = Cardinality( Range( mor ) );
     
-    ## For CompilerForCAP we need if-elif-else with the same structure
-    if (@not ForAll( rel, a -> IsBigInt( a ) && a >= 0 ))
-        return false;
-    elseif (s != Length( rel ))
-        return false;
-    elseif (@not ForAll( rel, a -> a < t ))
-        return false;
-    else
-        return true;
-    end;
+    return ForAll( rel, a -> IsBigInt( a ) && a >= 0 ) &&
+           s == Length( rel ) &&
+           ForAll( rel, a -> a < t );
     
 end );
 
@@ -632,12 +643,12 @@ AddUniversalMorphismIntoDirectProductWithGivenDirectProduct( SkeletalFinSets,
     
     d = List( D, Cardinality );
     
-    dd = List( (0):(l - 1), j -> Product( d[(1):(j)] ) );
+    dd = List( (1):(l), j -> Product( d[(1):(j - 1)] ) );
     
     taus = List( tau, AsList );
     
-    # if l == 0, then Sum( (0):(l - 1), j -> ... ) == 0 ∈ TerminalObject == P
-    return MorphismConstructor( cat, T, List( T, i -> Sum( (0):(l - 1), j -> taus[1 + j][1 + i] * dd[1 + j] ) ), P );
+    # if l == 0, then Sum( (1):(l), j -> ... ) == 0 ∈ TerminalObject == P
+    return MorphismConstructor( cat, T, List( T, i -> Sum( (1):(l), j -> taus[j][1 + i] * dd[j] ) ), P );
     
 end );
 
@@ -1075,6 +1086,8 @@ end, 401 ); # weight == 1 + Sum( [
 
 end );
 
+#####
+
 ##
 AddDerivationToCAP( IsHomSetInhabited,
         "IsHomSetInhabited using IsInitial when the range category of the homomorphism structure is the skeletal category of finite sets",
@@ -1098,7 +1111,7 @@ end );
 
 ## backwards compatibility
 @InstallMethod( Length,
-        "for a CAP skeletal finite set",
+        "for an object in a skeletal category of finite sets",
         [ IsObjectInSkeletalCategoryOfFiniteSets ],
         
   function ( s )
@@ -1109,34 +1122,40 @@ end );
 
 ##
 @InstallMethod( StringGAP,
-        "for a CAP skeletal finite set",
+        "for an object in a skeletal category of finite sets",
         [ IsObjectInSkeletalCategoryOfFiniteSets ],
         
   function ( s )
+    
     return @Concatenation( "FinSet( SkeletalFinSets, ", StringGAP( Cardinality( s ) ), " )" );
+    
 end );
 
 ##
 @InstallMethod( StringGAP,
-        "for a CAP map of skeletal finite sets",
+        "for a morphism in a skeletal category of finite sets",
         [ IsMorphismInSkeletalCategoryOfFiniteSets ],
         
   function ( phi )
+    
     return @Concatenation( "MapOfFinSets( SkeletalFinSets, ", StringGAP( Source( phi ) ), ", ", StringGAP( AsList( phi ) ), ", ", StringGAP( Range( phi ) ), " )" );
+    
 end );
 
 ##
 @InstallMethod( ViewString,
-        "for a CAP skeletal finite set",
+        "for an object in a skeletal category of finite sets",
         [ IsObjectInSkeletalCategoryOfFiniteSets ],
         
   function ( s )
+    
     return @Concatenation( "|", StringGAP( Cardinality( s ) ), "|" );
+    
 end );
 
 ##
 @InstallMethod( ViewString,
-        "for a CAP map of skeletal finite sets",
+        "for a morphism in a skeletal category of finite sets",
         [ IsMorphismInSkeletalCategoryOfFiniteSets ],
         
   function ( phi )
@@ -1170,7 +1189,7 @@ end );
 
 ##
 @InstallMethod( PrintString,
-        "for a CAP skeletal finite set",
+        "for an object in a skeletal category of finite sets",
         [ IsObjectInSkeletalCategoryOfFiniteSets ],
         
   function ( s )
@@ -1194,7 +1213,7 @@ end );
 
 ##
 @InstallMethod( PrintString,
-        "for a CAP map of skeletal finite sets",
+        "for a morphism in a skeletal category of finite sets",
         [ IsMorphismInSkeletalCategoryOfFiniteSets ],
         
   function ( phi )
@@ -1208,7 +1227,7 @@ end );
 
 ##
 @InstallMethod( DisplayString,
-        "for a CAP skeletal finite set",
+        "for an object in a skeletal category of finite sets",
         [ IsObjectInSkeletalCategoryOfFiniteSets ],
         
   function ( s )
@@ -1219,22 +1238,11 @@ end );
 
 ##
 @InstallMethod( DisplayString,
-        "for a CAP map of skeletal finite sets",
+        "for a morphism in a skeletal category of finite sets",
         [ IsMorphismInSkeletalCategoryOfFiniteSets ],
         
   function ( phi )
     
     return @Concatenation( PrintString( phi ), "\n" );
-    
-end );
-
-##
-@InstallMethod( FinSet,
-        "for a nonnegative integer",
-        [ IsBigInt ],
-        
-  function ( n )
-    
-    return FinSet( SkeletalFinSets, n );
     
 end );

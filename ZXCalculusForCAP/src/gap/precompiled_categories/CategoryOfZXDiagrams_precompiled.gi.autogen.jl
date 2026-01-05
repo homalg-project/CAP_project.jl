@@ -204,7 +204,7 @@ function ( cat_1, arg2_1, arg3_1 )
                       return deduped_3_1[1 + edge_2[2]] - 1;
                   end ) == List( deduped_8_1, function ( edge_2 )
                       return deduped_4_1[1 + edge_2[2]] - 1;
-                  end )) && (deduped_10_1[2] == deduped_9_1[2] && true) && (deduped_10_1[3] == deduped_9_1[3] && true);
+                  end )) && deduped_10_1[2] == deduped_9_1[2] && deduped_10_1[3] == deduped_9_1[3];
 end
 ########
         
@@ -219,7 +219,7 @@ function ( cat_1, arg2_1, arg3_1 )
     deduped_3_1 = BigInt( 0 );
     deduped_2_1 = AsInteger( arg3_1 );
     deduped_1_1 = AsInteger( arg2_1 );
-    return deduped_1_1 == deduped_2_1 && true && true && (ListWithIdenticalEntries( deduped_1_1, deduped_3_1 ) == ListWithIdenticalEntries( deduped_2_1, deduped_3_1 ) && true);
+    return deduped_1_1 == deduped_2_1 && ListWithIdenticalEntries( deduped_1_1, deduped_3_1 ) == ListWithIdenticalEntries( deduped_2_1, deduped_3_1 );
 end
 ########
         
@@ -233,55 +233,27 @@ function ( cat_1, alpha_1 )
     local deduped_1_1, deduped_3_1, deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1, deduped_10_1, deduped_11_1, deduped_12_1;
     deduped_12_1 = BigInt( 0 );
     deduped_11_1 = VertexLabeledGraph( alpha_1 );
-    deduped_10_1 = deduped_11_1[1];
-    deduped_9_1 = AsInteger( Range( alpha_1 ) );
-    deduped_8_1 = deduped_11_1[3];
-    deduped_7_1 = AsInteger( Source( alpha_1 ) );
-    deduped_6_1 = deduped_11_1[2];
-    if (@not true)
-        deduped_5_1 = false;
-    elseif (deduped_12_1 != 0)
-        deduped_5_1 = false;
-    else
-        deduped_5_1 = true;
-    end;
-    deduped_3_1 = List( deduped_10_1, ZX_LabelToInteger );
-    deduped_1_1 = Length( deduped_10_1 );
-    return CAP_JIT_EXPR_CASE_WRAPPER( function (  )
-                      if (@not ForAll( deduped_6_1, function ( a_3 )
-                                   return IsBigInt( a_3 ) && a_3 >= 0;
-                               end ))
-                          return false;
-                      elseif (deduped_7_1 != Length( deduped_6_1 ))
-                          return false;
-                      elseif (@not ForAll( deduped_6_1, function ( a_3 )
-                                   return a_3 < deduped_1_1;
-                               end ))
-                          return false;
-                      else
-                          return true;
-                      end;
-                      return;
-                  end )(  ) && deduped_5_1 && true && (ListWithIdenticalEntries( deduped_7_1, deduped_12_1 ) == List( (0):(deduped_7_1 - 1), function ( i_2 )
-                    return deduped_3_1[1 + deduped_6_1[1 + i_2]];
-                end ) && true) && (CAP_JIT_EXPR_CASE_WRAPPER( function (  )
-                      if (@not ForAll( deduped_8_1, function ( a_3 )
-                                   return IsBigInt( a_3 ) && a_3 >= 0;
-                               end ))
-                          return false;
-                      elseif (deduped_9_1 != Length( deduped_8_1 ))
-                          return false;
-                      elseif (@not ForAll( deduped_8_1, function ( a_3 )
-                                   return a_3 < deduped_1_1;
-                               end ))
-                          return false;
-                      else
-                          return true;
-                      end;
-                      return;
-                  end )(  ) && deduped_5_1 && true && (ListWithIdenticalEntries( deduped_9_1, deduped_12_1 ) == List( (0):(deduped_9_1 - 1), function ( i_2 )
-                    return deduped_3_1[1 + deduped_8_1[1 + i_2]];
-                end ) && true));
+    deduped_10_1 = deduped_12_1 == 0;
+    deduped_9_1 = deduped_11_1[1];
+    deduped_8_1 = AsInteger( Range( alpha_1 ) );
+    deduped_7_1 = deduped_11_1[3];
+    deduped_6_1 = AsInteger( Source( alpha_1 ) );
+    deduped_5_1 = deduped_11_1[2];
+    deduped_3_1 = List( deduped_9_1, ZX_LabelToInteger );
+    deduped_1_1 = Length( deduped_9_1 );
+    return ForAll( deduped_5_1, function ( a_2 )
+                      return IsBigInt( a_2 ) && a_2 >= 0;
+                  end ) && deduped_6_1 == Length( deduped_5_1 ) && ForAll( deduped_5_1, function ( a_2 )
+                    return a_2 < deduped_1_1;
+                end ) && deduped_10_1 && ListWithIdenticalEntries( deduped_6_1, deduped_12_1 ) == List( (0):(deduped_6_1 - 1), function ( i_2 )
+                  return deduped_3_1[1 + deduped_5_1[1 + i_2]];
+              end ) && (ForAll( deduped_7_1, function ( a_2 )
+                      return IsBigInt( a_2 ) && a_2 >= 0;
+                  end ) && deduped_8_1 == Length( deduped_7_1 ) && ForAll( deduped_7_1, function ( a_2 )
+                    return a_2 < deduped_1_1;
+                end ) && deduped_10_1 && ListWithIdenticalEntries( deduped_8_1, deduped_12_1 ) == List( (0):(deduped_8_1 - 1), function ( i_2 )
+                  return deduped_3_1[1 + deduped_7_1[1 + i_2]];
+              end ));
 end
 ########
         
@@ -292,35 +264,14 @@ end
         
 ########
 function ( cat_1, arg2_1 )
-    local deduped_1_1, deduped_2_1, deduped_3_1;
-    deduped_3_1 = BigInt( 0 );
-    deduped_2_1 = AsInteger( arg2_1 );
-    deduped_1_1 = ListWithIdenticalEntries( deduped_2_1, deduped_3_1 );
-    return CAP_JIT_EXPR_CASE_WRAPPER( function (  )
-                  if (@not ForAll( deduped_1_1, function ( a_3 )
-                               return IsBigInt( a_3 ) && a_3 >= 0;
-                           end ))
-                      return false;
-                  elseif (deduped_2_1 != deduped_2_1)
-                      return false;
-                  elseif (@not ForAll( deduped_1_1, function ( a_3 )
-                               return a_3 < 4;
-                           end ))
-                      return false;
-                  else
-                      return true;
-                  end;
-                  return;
-              end )(  ) && CAP_JIT_EXPR_CASE_WRAPPER( function (  )
-                  if (@not true)
-                      return false;
-                  elseif (deduped_3_1 != 0)
-                      return false;
-                  else
-                      return true;
-                  end;
-                  return;
-              end )(  ) && true;
+    local deduped_1_1, deduped_2_1;
+    deduped_2_1 = BigInt( 0 );
+    deduped_1_1 = ListWithIdenticalEntries( AsInteger( arg2_1 ), deduped_2_1 );
+    return ForAll( deduped_1_1, function ( a_2 )
+                return IsBigInt( a_2 ) && a_2 >= 0;
+            end ) && ForAll( deduped_1_1, function ( a_2 )
+                return a_2 < 4;
+            end ) && deduped_2_1 == 0;
 end
 ########
         

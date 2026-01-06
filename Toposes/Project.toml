@@ -8,7 +8,7 @@ authors = [
 ]
 
 # Transpiled from GAP's Toposes v2026.01-01
-version = "0.1.15"
+version = "0.1.16"
 
 [deps]
 CAP = "d64df2ee-d2bb-46f4-8cbc-f03bb858f8cb"

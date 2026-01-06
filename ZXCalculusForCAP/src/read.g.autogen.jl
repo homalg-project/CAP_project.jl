@@ -15,7 +15,7 @@ include( "gap/Tools.gi.autogen.jl" );
 #= comment for Julia
 if IsPackageMarkedForLoading( "FunctorCategories", ">= 2023.07-01" ) then
     
-    include( "gap/CategoryOfZXDiagrams_as_CategoryOfCospans_CategoryOfDecoratedQuivers.gi.autogen.jl" );
+    include( "gap/CategoryOfZXDiagrams_as_a_tower.gi.autogen.jl" );
     
 fi;
 # =#

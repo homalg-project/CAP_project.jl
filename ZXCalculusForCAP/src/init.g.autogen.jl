@@ -8,6 +8,6 @@ include( "gap/CategoryOfCospans_for_ZXCalculus.gd.autogen.jl" );
 
 include( "gap/CategoryOfZXDiagrams.gd.autogen.jl" );
 
-include( "gap/CategoryOfZXDiagrams_as_CategoryOfCospans_CategoryOfDecoratedQuivers.gd.autogen.jl" );
+include( "gap/CategoryOfZXDiagrams_as_a_tower.gd.autogen.jl" );
 
 include( "gap/Tools.gd.autogen.jl" );

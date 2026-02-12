@@ -6,8 +6,8 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's LinearClosuresForCAP v2025.12-01
-version = "0.1.5"
+# Transpiled from GAP's LinearClosuresForCAP v2026.02-01
+version = "0.1.6"
 
 [deps]
 CAP = "d64df2ee-d2bb-46f4-8cbc-f03bb858f8cb"
@@ -21,7 +21,7 @@ FinSetsForCAP = "0a079e9b-4bc2-44fe-a89b-7607e4464786"
 
 [compat]
 julia = "1.11"
-CAP = "0.6"
+CAP = "~0.6.19"
 LinearAlgebraForCAP = "0.1"
 AdditiveClosuresForCAP = "0.1"
 FinSetsForCAP = "0.3"

@@ -10,7 +10,7 @@ LinearClosure( SkeletalFinSets )
 julia> Display( QSkeletalFinSets )
 A CAP category with name LinearClosure( SkeletalFinSets ):
 
-22 primitive operations were used to derive 68 operations for this category which algorithmically
+22 primitive operations were used to derive 69 operations for this category which algorithmically
 * IsEquippedWithHomomorphismStructure
 * IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms
 and furthermore mathematically

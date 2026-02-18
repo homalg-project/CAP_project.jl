@@ -363,8 +363,14 @@ include("gap_emulation/filters.jl")
 # operations
 include("gap_emulation/operations.jl")
 
+# property based dispatch (must be before attributes since attributes can be dispatchable)
+include("gap_emulation/filter_based_dispatch.jl")
+
 # attributes
 include("gap_emulation/attributes.jl")
+
+# filters intersection
+include("gap_emulation/filters_intersection.jl")
 
 # files
 include("gap_emulation/files.jl")
@@ -602,6 +608,16 @@ function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_
 		symbol_setter = Setter(attributes_and_values[i])
 		value = attributes_and_values[i + 1]
 		symbol_setter(obj, value)
+	end
+
+	# If the object's filter carries implied properties, eagerly set them to true so Has<Property>(obj) becomes true immediately.
+	local obj_filter = FilterOfObject(obj)
+	if obj_filter !== nothing
+		for prop in obj_filter.implied_properties
+			if IsProperty(prop)
+				Setter(prop)(obj, true)
+			end
+		end
 	end
 	obj
 end

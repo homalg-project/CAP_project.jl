@@ -49,7 +49,7 @@
       
       SetIsLinearCategoryOverCommutativeRing( category, true );
       
-      SetCommutativeRingOfLinearCategory( category, ring );
+      SetCommutativeSemiringOfLinearCategory( category, ring );
       
     end;
     
@@ -157,7 +157,7 @@ end );
       
       SetIsLinearCategoryOverCommutativeRing( category, true );
       
-      SetCommutativeRingOfLinearCategory( category, ring );
+      SetCommutativeSemiringOfLinearCategory( category, ring );
       
     end;
     

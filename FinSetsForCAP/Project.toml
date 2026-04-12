@@ -7,7 +7,7 @@ authors = [
 ]
 
 # Transpiled from GAP's FinSetsForCAP v2026.01-04
-version = "0.3.7"
+version = "0.3.8"
 
 [deps]
 CAP = "d64df2ee-d2bb-46f4-8cbc-f03bb858f8cb"
@@ -21,7 +21,7 @@ Toposes = "36a15fe6-6211-457f-8fdb-aa2e0d2f3052"
 
 [compat]
 julia = "1.11"
-CAP = "~0.6.16"
+CAP = "~0.6.16, 0.7"
 MonoidalCategories = "0.1, 0.2, 0.3"
 CartesianCategories = "0.1, 0.2, 0.3"
 Toposes = "0.1"

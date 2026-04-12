@@ -150,6 +150,7 @@ function FiberProduct end
 global const FiberProductOp = FiberProduct
 
 global const Log10 = log10
+global const EQ = ==
 
 function TensorProductOp end
 function TensorProduct(arg...)
@@ -472,6 +473,14 @@ end
 
 function PrintString(obj)
 	StringGAP(obj)
+end
+
+function StringView(obj)
+	sprint(show, MIME"text/plain"(), obj)
+end
+
+function StringDisplay(obj)
+	sprint(show, MIME"text/plain"(), obj) * "\n"
 end
 
 @InstallMethod( StringGAP, [ IsObject ], obj -> "<object>" );
@@ -1065,8 +1074,13 @@ function CollectEntries(list::Vector)
 	end
 end
 
-function DuplicateFreeList(list::Vector)
-	unique(list)
+function DuplicateFreeList(list::Vector; func = ==)
+	# unique(list) compares using isequal and hash (not wanted)
+	d_list = eltype(list)[]
+	for x in list
+		any(y -> func(y, x), d_list) || push!(d_list, x)
+	end
+	d_list
 end
 
 function IsDuplicateFreeList(list::Vector)

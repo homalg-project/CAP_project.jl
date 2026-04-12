@@ -922,11 +922,11 @@ end );
         
         @Assert( 0, IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( category ) );
         
-        @Assert( 0, IsIdenticalObj( CommutativeRingOfLinearCategory( category ), ring ) );
+        @Assert( 0, IsIdenticalObj( CommutativeSemiringOfLinearCategory( category ), ring ) );
         
         ##
-        # MultiplyWithElementOfCommutativeRingForMorphisms cannot be typed yet, so it cannot be precompiled yet
-        AddMultiplyWithElementOfCommutativeRingForMorphisms( category,
+        # MultiplyWithElementOfCommutativeSemiringForMorphisms cannot be typed yet, so it cannot be precompiled yet
+        AddMultiplyWithElementOfCommutativeSemiringForMorphisms( category,
           function( cat, r, alpha )
             
             return CategoryOfRowsMorphism( cat, Source( alpha ), r * UnderlyingMatrix( alpha ), Range( alpha ) );
@@ -965,11 +965,11 @@ end );
         
         @Assert( 0, IsLinearCategoryOverCommutativeRing( category ) );
         
-        @Assert( 0, IsIdenticalObj( CommutativeRingOfLinearCategory( category ), BaseRing( ring ) ) );
+        @Assert( 0, IsIdenticalObj( CommutativeSemiringOfLinearCategory( category ), BaseRing( ring ) ) );
         
         ##
-        # MultiplyWithElementOfCommutativeRingForMorphisms cannot be typed yet, so it cannot be precompiled yet
-        AddMultiplyWithElementOfCommutativeRingForMorphisms( category,
+        # MultiplyWithElementOfCommutativeSemiringForMorphisms cannot be typed yet, so it cannot be precompiled yet
+        AddMultiplyWithElementOfCommutativeSemiringForMorphisms( category,
           function( cat, r, alpha )
             
             return CategoryOfRowsMorphism( cat, Source( alpha ), (r / ring) * UnderlyingMatrix( alpha ), Range( alpha ) );
@@ -1321,7 +1321,7 @@ end );
 end );
 
 ##
-## use ExternalHom & CoefficientsOfMorphism to derive Hom-Structure
+## use BasisOfExternalHom & CoefficientsOfMorphism to derive Hom-Structure
 ##
 AddFinalDerivationBundle( "Using BasisOfExternalHom and CoefficientsOfMorphism to equip k-linear categories with a Hom-Structure over the category of k-rows",
                     [
@@ -1381,7 +1381,7 @@ AddFinalDerivationBundle( "Using BasisOfExternalHom and CoefficientsOfMorphism t
     
     basis = List( basis, ell -> CoefficientsOfMorphism( cat, PreComposeList( cat, Source( alpha ), [ alpha, ell, beta ], Range( beta ) ) ) );
     
-    m = HomalgMatrixListList( basis, RankOfObject( hom_source ), RankOfObject( hom_range ), CommutativeRingOfLinearCategory( cat ) );
+    m = HomalgMatrixListList( basis, RankOfObject( hom_source ), RankOfObject( hom_range ), CommutativeSemiringOfLinearCategory( cat ) );
     
     return CategoryOfRowsMorphism( RangeCategoryOfHomomorphismStructure( cat ), hom_source, m, hom_range );
     
@@ -1395,7 +1395,7 @@ AddFinalDerivationBundle( "Using BasisOfExternalHom and CoefficientsOfMorphism t
   function ( cat, distinguished_object, alpha, r )
     local m;
     
-    m = HomalgRowVector( CoefficientsOfMorphism( cat, alpha ), RankOfObject( r ), CommutativeRingOfLinearCategory( cat ) );
+    m = HomalgRowVector( CoefficientsOfMorphism( cat, alpha ), RankOfObject( r ), CommutativeSemiringOfLinearCategory( cat ) );
     
     return CategoryOfRowsMorphism( RangeCategoryOfHomomorphismStructure( cat ), distinguished_object, m, r );
     
@@ -1425,8 +1425,9 @@ AddFinalDerivationBundle( "Using BasisOfExternalHom and CoefficientsOfMorphism t
          HasIsEquippedWithHomomorphismStructure( cat ) && IsEquippedWithHomomorphismStructure( cat ) &&
          HasRangeCategoryOfHomomorphismStructure( cat ) &&
          IsCategoryOfRows( RangeCategoryOfHomomorphismStructure( cat ) ) &&
-         HasIsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( cat ) && IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( cat ) &&
-         HasCommutativeRingOfLinearCategory( cat ) && IsHomalgRing( CommutativeRingOfLinearCategory( cat ) ))
+         HasIsLinearCategoryOverCommutativeSemiringWithFinitelyGeneratedFreeExternalHoms( cat ) &&
+         IsLinearCategoryOverCommutativeSemiringWithFinitelyGeneratedFreeExternalHoms( cat ) &&
+         HasCommutativeSemiringOfLinearCategory( cat ) && IsHomalgSemiring( CommutativeSemiringOfLinearCategory( cat ) ))
           
           return true;
         

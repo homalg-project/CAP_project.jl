@@ -46,7 +46,7 @@
         
         SetIsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( category, true );
         
-        SetCommutativeRingOfLinearCategory( category, ring );
+        SetCommutativeSemiringOfLinearCategory( category, ring );
         
         SetIsStrictMonoidalCategory( category, true );
         
@@ -266,7 +266,7 @@ end );
     if (HasIsCommutative( ring ) && IsCommutative( ring ))
         
         ##
-        AddMultiplyWithElementOfCommutativeRingForMorphisms( category,
+        AddMultiplyWithElementOfCommutativeSemiringForMorphisms( category,
           function( cat, r, alpha )
             
             return RingAsCategoryMorphism( category, r * UnderlyingRingElement( alpha ) );
@@ -440,13 +440,13 @@ end );
         
         SetIsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( category, true );
         
-        SetCommutativeRingOfLinearCategory( category, field );
+        SetCommutativeSemiringOfLinearCategory( category, field );
         
         SetRangeCategoryOfHomomorphismStructure( category, CategoryOfRows( field ) );
         SetIsEquippedWithHomomorphismStructure( category, true );
         
         ##
-        AddMultiplyWithElementOfCommutativeRingForMorphisms( category,
+        AddMultiplyWithElementOfCommutativeSemiringForMorphisms( category,
           function( cat, r, alpha )
             
             return RingAsCategoryMorphism( category, (r / ring) * UnderlyingRingElement( alpha ) );

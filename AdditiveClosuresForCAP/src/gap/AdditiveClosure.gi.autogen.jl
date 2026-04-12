@@ -118,11 +118,11 @@ end );
     SetUnderlyingCategory( category, underlying_category );
     
     if (HasIsLinearCategoryOverCommutativeRing( underlying_category ) && IsLinearCategoryOverCommutativeRing( underlying_category ) &&
-        HasCommutativeRingOfLinearCategory( underlying_category ))
+        HasCommutativeSemiringOfLinearCategory( underlying_category ))
         
         SetIsLinearCategoryOverCommutativeRing( category, true );
         
-        SetCommutativeRingOfLinearCategory( category, CommutativeRingOfLinearCategory( underlying_category ) );
+        SetCommutativeSemiringOfLinearCategory( category, CommutativeSemiringOfLinearCategory( underlying_category ) );
         
         if (HasIsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( underlying_category ) &&
            IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( underlying_category ))
@@ -984,15 +984,15 @@ end );
         
     end );
     
-    if (CanCompute( underlying_category, "MultiplyWithElementOfCommutativeRingForMorphisms" ))
+    if (CanCompute( underlying_category, "MultiplyWithElementOfCommutativeSemiringForMorphisms" ))
       
-      AddMultiplyWithElementOfCommutativeRingForMorphisms( category,
+      AddMultiplyWithElementOfCommutativeSemiringForMorphisms( category,
         function( cat, r, alpha )
           local listlist;
             
             listlist = List( (1):(NrRows( alpha )),
                             i -> List( (1):(NrCols( alpha )),
-                                j -> MultiplyWithElementOfCommutativeRingForMorphisms( UnderlyingCategory( cat ), r, alpha[i, j] ) ) );
+                                j -> MultiplyWithElementOfCommutativeSemiringForMorphisms( UnderlyingCategory( cat ), r, alpha[i, j] ) ) );
             
             return AdditiveClosureMorphism( cat, Source( alpha ), listlist, Range( alpha ) );
             

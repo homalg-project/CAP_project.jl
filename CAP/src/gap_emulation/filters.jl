@@ -36,13 +36,22 @@ function (filter::Filter)(obj)
 		return false
 	end
 	
-  if (filter in filter_obj.implied_filters) || (filter_obj in filter.implied_filters)
+	if (filter in filter_obj.implied_filters) || (filter_obj in filter.implied_filters)
 		return filter.additional_predicate(obj)
 	end
 	
 	if !isempty(filter.implied_properties)
 		base_filter = FilterOfType(supertype(filter.abstract_type))
 		if base_filter in filter_obj.implied_filters
+			return filter.additional_predicate(obj)
+		end
+	end
+	
+	# Fallback for intersection filters (names joined by "_and_"):
+	if contains(filter.name, "_and_")
+		parts = split(filter.name, "_and_")
+		if all(part -> IsBoundGlobal(part) && IsFilter(ValueGlobal(part)), parts) &&
+				all(part -> ValueGlobal(part)(obj), parts)
 			return filter.additional_predicate(obj)
 		end
 	end

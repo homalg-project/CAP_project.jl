@@ -1240,12 +1240,12 @@ global const IdFunc = identity
 
 global const Append = append!
 
-function CallFuncList( func::Function, list )
-	func(list...)
+function CallFuncList( func::Function, list; kwargs... )
+	func(list...; kwargs...)
 end
 
-function CallFuncListAtRuntime( func::Function, list )
-	Base.invokelatest(func, list...)
+function CallFuncListAtRuntime( func::Function, list; kwargs... )
+	Base.invokelatest(func, list...; kwargs...)
 end
 
 global const IsEmpty = isempty

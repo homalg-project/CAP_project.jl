@@ -102,41 +102,43 @@ export @FunctionWithNamedArguments
 
 function DirectSum(arg...)
 	
-    if IsCapCategory( arg[1] ) then
-        
+	if IsCapCategory( arg[1] )
+		
 		Error( "this case should never be triggered" )
-        
-    end;
-    
-    if Length( arg ) == 1 &&
-       IsList( arg[1] ) &&
-       ForAll( arg[1], IsCapCategoryObject ) then
-       
-       return DirectSum( CapCategory( arg[1][1] ), arg[1] );
-       
-    end;
-    
-    return DirectSum( CapCategory( arg[1] ), arg );
+		
+	end;
+	
+	if Length( arg ) == 1 &&
+	   IsList( arg[1] ) &&
+			ForAll( arg[1], IsCapCategoryObject )
+		
+		return DirectSum( CapCategory( arg[1][1] ), arg[1] );
+		
+	end;
+	
+	return DirectSum( CapCategory( arg[1] ), arg );
 	
 end
+
 global const DirectSumOp = DirectSum
+
 function DirectProduct(arg...)
 	
-    if IsCapCategory( arg[1] ) then
-        
+	if IsCapCategory( arg[1] )
+		
 		Error( "this case should never be triggered" )
-        
-    end;
-    
-    if Length( arg ) == 1 &&
-       IsList( arg[1] ) &&
-       ForAll( arg[1], IsCapCategoryObject ) then
-       
-       return DirectProduct( CapCategory( arg[1][1] ), arg[1] );
-       
-    end;
-    
-    return DirectProduct( CapCategory( arg[1] ), arg );
+		
+	end;
+	
+	if Length( arg ) == 1 &&
+		IsList( arg[1] ) &&
+		ForAll( arg[1], IsCapCategoryObject )
+		
+		return DirectProduct( CapCategory( arg[1][1] ), arg[1] );
+		
+	end;
+	
+	return DirectProduct( CapCategory( arg[1] ), arg );
 	
 end
 global const DirectProductOp = DirectProduct
@@ -801,7 +803,7 @@ function Perform( list, func )
 	end
 end
 
-function Product(list::Union{Vector, UnitRange, StepRange, Tuple})
+function Product(list::Union{Vector, LazyHVector, UnitRange, StepRange, Tuple})
 	if length(list) == 0
 		1
 	else
@@ -809,7 +811,7 @@ function Product(list::Union{Vector, UnitRange, StepRange, Tuple})
 	end
 end
 
-function Sum(list::Union{Vector, UnitRange, StepRange, Tuple}, init = 0)
+function Sum(list::Union{Vector, LazyHVector, UnitRange, StepRange, Tuple}, init = 0)
 	if length(list) == 0
 		init
 	else
@@ -1395,13 +1397,14 @@ function TransposedMat(M)
 	end
 end
 
-function KroneckerProduct(mat1::Vector{Vector{T}}, mat2::Vector{Vector{T}}) where T
-	kroneckerproduct = Vector{Vector{T}}()
+function KroneckerProduct(mat1::Vector{Vector{S}}, mat2::Vector{Vector{T}}) where {S, T}
+	U = promote_type(S, T)
+	kroneckerproduct = Vector{Vector{U}}()
 	for row1 in mat1
 		for row2 in mat2
-			row = Vector{T}()
-			for i  in row1
-				append!( row, i * row2 )
+			row = Vector{U}()
+			for i in row1
+				append!( row, map(x -> i * x, row2) )
 			end
 		push!( kroneckerproduct, row )
 		end
@@ -1414,7 +1417,7 @@ struct PermList
 end
 
 function PermutationMat(perm::PermList, dim::Int)
-	if length(perm.list) !== dim then
+	if length(perm.list) !== dim
 		Error("this case is not implemented yet");
 	end
 	id = IdentityMat(dim);

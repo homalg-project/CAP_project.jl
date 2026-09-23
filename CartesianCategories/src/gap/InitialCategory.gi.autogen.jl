@@ -69,3 +69,26 @@
     return I;
     
 end ) );
+
+##
+@InstallMethod( SetOfObjects,
+          "for initial CAP category",
+          [ IsInitialCapCategory ],
+          
+  function ( I )
+    
+    return SetOfObjectsOfCategory( I );
+    
+end );
+
+##
+@InstallMethod( SetOfGeneratingMorphisms,
+          "for initial CAP category",
+          [ IsInitialCapCategory ],
+          
+  function ( I )
+    
+    return SetOfGeneratingMorphismsOfCategory( I );
+    
+end );
+

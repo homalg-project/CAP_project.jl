@@ -6,8 +6,8 @@ authors = [
 	"Tom Kuhmichel <tom.kuhmichel@student.uni-siegen.de>"
 ]
 
-# Transpiled from GAP's CartesianCategories v2026.07-03
-version = "0.4.3"
+# Transpiled from GAP's CartesianCategories v2026.09-01
+version = "0.4.4"
 
 [deps]
 CAP = "d64df2ee-d2bb-46f4-8cbc-f03bb858f8cb"
@@ -20,7 +20,7 @@ MonoidalCategories = "bfd98c86-782f-4b94-909f-74167f1eb613"
 [compat]
 julia = "1.11"
 CAP = "~0.8.3"
-MonoidalCategories = "~0.3.2"
+MonoidalCategories = "~0.3.3"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

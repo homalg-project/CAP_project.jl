@@ -79,3 +79,8 @@ echo "Pushed to FreydCategoriesForCAP.jl"
 git subtree split --prefix=ModulePresentationsForCAP -b ModulePresentationsForCAP-split > /dev/null 2>&1
 git push https://${JULIA_SUBSPLIT_TOKEN}@github.com/homalg-project/ModulePresentationsForCAP.jl.git ModulePresentationsForCAP-split:master
 echo "Pushed to ModulePresentationsForCAP.jl"
+
+# GeneralizedMorphismsForCAP
+git subtree split --prefix=GeneralizedMorphismsForCAP -b GeneralizedMorphismsForCAP-split > /dev/null 2>&1
+git push https://${JULIA_SUBSPLIT_TOKEN}@github.com/homalg-project/GeneralizedMorphismsForCAP.jl.git GeneralizedMorphismsForCAP-split:master
+echo "Pushed to GeneralizedMorphismsForCAP.jl"

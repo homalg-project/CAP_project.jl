@@ -38,6 +38,7 @@ jobs:
           - LinearClosuresForCAP
           - FreydCategoriesForCAP
           - ModulePresentationsForCAP
+          - GeneralizedMorphismsForCAP
         julia-version:
           - '1.12'
           - 'nightly'

@@ -12,6 +12,7 @@ install:
 		Pkg.develop(path = "LocalesForCAP"); \
 		Pkg.develop(path = "FreydCategoriesForCAP"); \
 		Pkg.develop(path = "ModulePresentationsForCAP"); \
+		Pkg.develop(path = "GeneralizedMorphismsForCAP"); \
 	'
 
 uninstall:
@@ -27,6 +28,7 @@ uninstall:
 	$(MAKE) -C LocalesForCAP uninstall
 	$(MAKE) -C FreydCategoriesForCAP uninstall
 	$(MAKE) -C ModulePresentationsForCAP uninstall
+	$(MAKE) -C GeneralizedMorphismsForCAP uninstall
 
 gen-basic:
 	$(MAKE) -C CAP gen-basic
@@ -41,6 +43,7 @@ gen-basic:
 	$(MAKE) -C LocalesForCAP gen-basic
 	$(MAKE) -C FreydCategoriesForCAP gen-basic
 	$(MAKE) -C ModulePresentationsForCAP gen-basic
+	$(MAKE) -C GeneralizedMorphismsForCAP gen-basic
 	$(MAKE) gen-root
 
 gen:
@@ -56,6 +59,7 @@ gen:
 	$(MAKE) -C LocalesForCAP gen
 	$(MAKE) -C FreydCategoriesForCAP gen
 	$(MAKE) -C ModulePresentationsForCAP gen
+	$(MAKE) -C GeneralizedMorphismsForCAP gen
 	$(MAKE) gen-root
 
 gen-root:
@@ -74,6 +78,7 @@ test:
 	$(MAKE) -C LocalesForCAP test
 	$(MAKE) -C FreydCategoriesForCAP test
 	$(MAKE) -C ModulePresentationsForCAP test
+	$(MAKE) -C GeneralizedMorphismsForCAP test
 
 git-commit:
 	$(MAKE) -C CAP git-commit
@@ -88,6 +93,7 @@ git-commit:
 	$(MAKE) -C LocalesForCAP git-commit
 	$(MAKE) -C FreydCategoriesForCAP git-commit
 	$(MAKE) -C ModulePresentationsForCAP git-commit
+	$(MAKE) -C GeneralizedMorphismsForCAP git-commit
 
 update-subsplits:
 	./dev/manually_update_subsplits.sh

@@ -80,3 +80,8 @@ echo ""
 git subtree split --prefix=ModulePresentationsForCAP -b ModulePresentationsForCAP-split
 git push git@github.com:${GITHUB_USER}/ModulePresentationsForCAP.jl.git ModulePresentationsForCAP-split:master
 echo ""
+
+# GeneralizedMorphismsForCAP
+git subtree split --prefix=GeneralizedMorphismsForCAP -b GeneralizedMorphismsForCAP-split
+git push git@github.com:${GITHUB_USER}/GeneralizedMorphismsForCAP.jl.git GeneralizedMorphismsForCAP-split:master
+echo ""

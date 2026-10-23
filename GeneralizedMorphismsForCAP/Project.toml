@@ -1,0 +1,40 @@
+name = "GeneralizedMorphismsForCAP"
+uuid = "7d31831b-b58f-4001-85d4-aa36a35a28ea"
+authors = [
+	"Sebastian Gutsche <sebastian.gutsche@gmail.com>",
+	"Sebastian Posur <sebastian.posur@uni-muenster.de>"
+]
+
+# Transpiled from GAP's GeneralizedMorphismsForCAP v2026.10-02
+version = "0.1.0"
+
+# Current dependencies of GAP's GeneralizedMorphismsForCAP v2026.10-02
+# NeededOtherPackages:
+#   GAPDoc >= 1.5
+#   CAP >= 2021.05-01
+#   MonoidalCategories >= 2024.01-03
+# SuggestedOtherPackages:
+
+[deps]
+CAP = "d64df2ee-d2bb-46f4-8cbc-f03bb858f8cb"
+MonoidalCategories = "bfd98c86-782f-4b94-909f-74167f1eb613"
+
+[weakdeps]
+MatricesForHomalg = "29b9b1b6-efa6-450e-8188-a5a2c25df071"
+LinearAlgebraForCAP = "3dc4824f-14ac-4ab7-8a60-75dbcd4a9d60"
+
+[extensions]
+
+[compat]
+CAP = "~0.8.21"
+MonoidalCategories = "~0.3.3"
+LinearAlgebraForCAP = "~0.2.5"
+MatricesForHomalg = "~0.1.13"
+julia = "1.12, 1.13"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+
+[targets]
+test = ["Test", "Documenter", "MatricesForHomalg", "LinearAlgebraForCAP"]

@@ -66,6 +66,11 @@ git subtree split --prefix=LinearClosuresForCAP -b LinearClosuresForCAP-split
 git push git@github.com:${GITHUB_USER}/LinearClosuresForCAP.jl.git LinearClosuresForCAP-split:master
 echo ""
 
+# LocalesForCAP
+git subtree split --prefix=LocalesForCAP -b LocalesForCAP-split
+git push git@github.com:${GITHUB_USER}/LocalesForCAP.jl.git LocalesForCAP-split:master
+echo ""
+
 # FreydCategoriesForCAP
 git subtree split --prefix=FreydCategoriesForCAP -b FreydCategoriesForCAP-split
 git push git@github.com:${GITHUB_USER}/FreydCategoriesForCAP.jl.git FreydCategoriesForCAP-split:master

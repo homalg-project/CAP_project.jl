@@ -9,6 +9,7 @@ install:
 		Pkg.develop(path = "LinearAlgebraForCAP"); \
 		Pkg.develop(path = "AdditiveClosuresForCAP"); \
 		Pkg.develop(path = "LinearClosuresForCAP"); \
+		Pkg.develop(path = "LocalesForCAP"); \
 		Pkg.develop(path = "FreydCategoriesForCAP"); \
 		Pkg.develop(path = "ModulePresentationsForCAP"); \
 	'
@@ -23,6 +24,7 @@ uninstall:
 	$(MAKE) -C LinearAlgebraForCAP uninstall
 	$(MAKE) -C AdditiveClosuresForCAP uninstall
 	$(MAKE) -C LinearClosuresForCAP uninstall
+	$(MAKE) -C LocalesForCAP uninstall
 	$(MAKE) -C FreydCategoriesForCAP uninstall
 	$(MAKE) -C ModulePresentationsForCAP uninstall
 
@@ -36,6 +38,7 @@ gen-basic:
 	$(MAKE) -C LinearAlgebraForCAP gen-basic
 	$(MAKE) -C AdditiveClosuresForCAP gen-basic
 	$(MAKE) -C LinearClosuresForCAP gen-basic
+	$(MAKE) -C LocalesForCAP gen-basic
 	$(MAKE) -C FreydCategoriesForCAP gen-basic
 	$(MAKE) -C ModulePresentationsForCAP gen-basic
 	$(MAKE) gen-root
@@ -50,6 +53,7 @@ gen:
 	$(MAKE) -C LinearAlgebraForCAP gen
 	$(MAKE) -C AdditiveClosuresForCAP gen
 	$(MAKE) -C LinearClosuresForCAP gen
+	$(MAKE) -C LocalesForCAP gen
 	$(MAKE) -C FreydCategoriesForCAP gen
 	$(MAKE) -C ModulePresentationsForCAP gen
 	$(MAKE) gen-root
@@ -67,6 +71,7 @@ test:
 	$(MAKE) -C LinearAlgebraForCAP test
 	$(MAKE) -C AdditiveClosuresForCAP test
 	$(MAKE) -C LinearClosuresForCAP test
+	$(MAKE) -C LocalesForCAP test
 	$(MAKE) -C FreydCategoriesForCAP test
 	$(MAKE) -C ModulePresentationsForCAP test
 
@@ -80,6 +85,7 @@ git-commit:
 	$(MAKE) -C LinearAlgebraForCAP git-commit
 	$(MAKE) -C AdditiveClosuresForCAP git-commit
 	$(MAKE) -C LinearClosuresForCAP git-commit
+	$(MAKE) -C LocalesForCAP git-commit
 	$(MAKE) -C FreydCategoriesForCAP git-commit
 	$(MAKE) -C ModulePresentationsForCAP git-commit
 

@@ -33,10 +33,12 @@ jobs:
           - FinSetsForCAP
           - ZXCalculusForCAP
           - LinearAlgebraForCAP
+          - LocalesForCAP
           - AdditiveClosuresForCAP
           - LinearClosuresForCAP
           - FreydCategoriesForCAP
           - ModulePresentationsForCAP
+          - GeneralizedMorphismsForCAP
         julia-version:
           - '1.12'
           - 'nightly'

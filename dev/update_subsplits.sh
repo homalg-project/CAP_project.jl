@@ -65,6 +65,11 @@ git subtree split --prefix=LinearClosuresForCAP -b LinearClosuresForCAP-split > 
 git push https://${JULIA_SUBSPLIT_TOKEN}@github.com/homalg-project/LinearClosuresForCAP.jl.git LinearClosuresForCAP-split:master
 echo "Pushed to LinearClosuresForCAP.jl"
 
+# LocalesForCAP
+git subtree split --prefix=LocalesForCAP -b LocalesForCAP-split > /dev/null 2>&1
+git push https://${JULIA_SUBSPLIT_TOKEN}@github.com/homalg-project/LocalesForCAP.jl.git LocalesForCAP-split:master
+echo "Pushed to LocalesForCAP.jl"
+
 # FreydCategoriesForCAP
 git subtree split --prefix=FreydCategoriesForCAP -b FreydCategoriesForCAP-split > /dev/null 2>&1
 git push https://${JULIA_SUBSPLIT_TOKEN}@github.com/homalg-project/FreydCategoriesForCAP.jl.git FreydCategoriesForCAP-split:master
@@ -74,3 +79,8 @@ echo "Pushed to FreydCategoriesForCAP.jl"
 git subtree split --prefix=ModulePresentationsForCAP -b ModulePresentationsForCAP-split > /dev/null 2>&1
 git push https://${JULIA_SUBSPLIT_TOKEN}@github.com/homalg-project/ModulePresentationsForCAP.jl.git ModulePresentationsForCAP-split:master
 echo "Pushed to ModulePresentationsForCAP.jl"
+
+# GeneralizedMorphismsForCAP
+git subtree split --prefix=GeneralizedMorphismsForCAP -b GeneralizedMorphismsForCAP-split > /dev/null 2>&1
+git push https://${JULIA_SUBSPLIT_TOKEN}@github.com/homalg-project/GeneralizedMorphismsForCAP.jl.git GeneralizedMorphismsForCAP-split:master
+echo "Pushed to GeneralizedMorphismsForCAP.jl"

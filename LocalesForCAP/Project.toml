@@ -36,9 +36,9 @@ FpCategories = "b9f20f1b-1226-4811-b6a0-b2e47a225553"
 [extensions]
 
 [compat]
-CAP = "~0.8.20"
+CAP = "~0.8.21"
 CartesianCategories = "~0.4.4"
-FpCategories = "~0.1.15"
+FpCategories = "~0.1.16"
 MonoidalCategories = "~0.3.3"
 ToolsForCategoricalTowers = "~0.1.13"
 Toposes = "~0.1.24"

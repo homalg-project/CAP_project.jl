@@ -8,10 +8,10 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's AdditiveClosuresForCAP v2026.07-03
-version = "0.2.6"
+# Transpiled from GAP's AdditiveClosuresForCAP v2026.10-01
+version = "0.2.7"
 
-# Current dependencies of GAP's AdditiveClosuresForCAP v2026.07-03
+# Current dependencies of GAP's AdditiveClosuresForCAP v2026.10-01
 # NeededOtherPackages:
 #   CAP >= 2026.07-03
 #   GradedRingForHomalg >= 2026.04-01

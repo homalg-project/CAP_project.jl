@@ -7,10 +7,10 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's CAP v2026.07-04
-version = "0.8.21"
+# Transpiled from GAP's CAP v2026.11-01
+version = "0.8.22"
 
-# Current dependencies of GAP's CAP v2026.07-04
+# Current dependencies of GAP's CAP v2026.11-01
 # NeededOtherPackages:
 #   ToolsForHomalg >= 2026.04-01
 # SuggestedOtherPackages:

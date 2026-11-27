@@ -4,7 +4,7 @@ install:
 	julia -e 'using Pkg; Pkg.develop(path=".");'
 
 uninstall:
-	julia -e 'using Pkg; Pkg.rm("CAP");'
+	julia -e 'using Pkg; haskey(Pkg.project().dependencies, "CAP") ? Pkg.rm("CAP") : println("\033[94mCAP is not installed or already removed, skipping.\033[0m");'
 
 test:
 	julia -e 'using Pkg; Pkg.test("CAP");'

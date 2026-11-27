@@ -3,7 +3,8 @@ name: Run Julia Tests
 on:
   push:
     branches:
-      - master
+      - "master"
+      - "*-ci"
   pull_request:
   schedule:
     - cron: "0 0 * * *"  # Run every day at midnight
@@ -18,29 +19,43 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  prepare_matrix:
+    name: Collect the CI test groups of all packages
+    runs-on: ubuntu-latest
+    outputs:
+      groups: ${{ steps.collect.outputs.groups }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Collect the CI test groups of all packages
+        id: collect
+        run: |
+          set -o pipefail
+
+          # every group in <package>/.github/ci_test_groups.yml becomes one job testing
+          # only the listed files of <package>/docs/src
+          groups=$(
+            yq --output-format=json '.ci_test_groups[] | . + {"package": (filename | split("/") | .[0]), "index": key}' */.github/ci_test_groups.yml | jq -cs '.'
+          )
+
+          echo "groups=$groups" >> "$GITHUB_OUTPUT"
+          echo "$groups" | jq '.'
+
   test:
-    name: ${{ matrix.package }} - Julia ${{ matrix.julia-version }} on ${{ matrix.os }}
+    needs: prepare_matrix
+    name: ${{ matrix.group.package }} (${{ matrix.group.group }}) - Julia ${{ matrix.julia-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
-        package:
-          - CAP
-          - MonoidalCategories
-          - CartesianCategories
-          - Toposes
-          - FinSetsForCAP
-          - ZXCalculusForCAP
-          - LinearAlgebraForCAP
-          - LocalesForCAP
-          - AdditiveClosuresForCAP
-          - LinearClosuresForCAP
-          - FreydCategoriesForCAP
-          - ModulePresentationsForCAP
-          - GeneralizedMorphismsForCAP
+        # one entry per package and group, collected by prepare_matrix
+        group: ${{ fromJson(needs.prepare_matrix.outputs.groups) }}
         julia-version:
           - '1.12'
+          - '1.13'
           - 'nightly'
         os:
           - ubuntu-latest
@@ -57,13 +72,17 @@ jobs:
       - name: Install all packages
         run: make install
       - name: Run tests
-        run: make -C ${{ matrix.package }} test
-
+        env:
+          PACKAGE: ${{ matrix.group.package }}
+          DOCTEST_FILES: ${{ join(matrix.group.files, ',') }}
+        run: |
+          make -C "$PACKAGE" test
+  
   update_subsplits:
     name: Update subsplits
     needs: test
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.repository == 'homalg-project/CAP_project.jl'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7

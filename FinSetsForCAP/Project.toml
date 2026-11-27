@@ -6,10 +6,10 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's FinSetsForCAP v2026.06-02
-version = "0.3.11"
+# Transpiled from GAP's FinSetsForCAP v2026.11-02
+version = "0.3.12"
 
-# Current dependencies of GAP's FinSetsForCAP v2026.06-02
+# Current dependencies of GAP's FinSetsForCAP v2026.11-02
 # NeededOtherPackages:
 #   CAP >= 2026.06-01
 #   MonoidalCategories >= 2026.06-01

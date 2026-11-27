@@ -6,10 +6,10 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's FreydCategoriesForCAP v2026.07-01
+# Transpiled from GAP's FreydCategoriesForCAP v2026.10-01
 version = "0.2.7"
 
-# Current dependencies of GAP's FreydCategoriesForCAP v2026.07-01
+# Current dependencies of GAP's FreydCategoriesForCAP v2026.10-01
 # NeededOtherPackages:
 #   CAP >= 2026.07-03
 #   MatricesForHomalg >= 2026.04-01

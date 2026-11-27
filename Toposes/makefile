@@ -4,7 +4,7 @@ install:
 	julia -e 'using Pkg; Pkg.develop(path=".");'
 
 uninstall:
-	julia -e 'using Pkg; Pkg.rm("Toposes");'
+	julia -e 'using Pkg; haskey(Pkg.project().dependencies, "Toposes") ? Pkg.rm("Toposes") : println("\033[94mToposes is not installed or already removed, skipping.\033[0m");'
 
 test:
 	julia -e 'using Pkg; Pkg.test("Toposes");'

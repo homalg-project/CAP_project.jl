@@ -4,7 +4,7 @@ install:
 	julia -e 'using Pkg; Pkg.develop(path=".");'
 
 uninstall:
-	julia -e 'using Pkg; Pkg.rm("AdditiveClosuresForCAP");'
+	julia -e 'using Pkg; haskey(Pkg.project().dependencies, "AdditiveClosuresForCAP") ? Pkg.rm("AdditiveClosuresForCAP") : println("\033[94mAdditiveClosuresForCAP is not installed or already removed, skipping.\033[0m");'
 
 test:
 	julia -e 'using Pkg; Pkg.test("AdditiveClosuresForCAP");'

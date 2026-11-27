@@ -1,0 +1,10 @@
+# Every group is tested in its own CI job, which tests only the listed files of docs/src.
+# Every .md file in docs/src must be listed in a group.
+# After editing this file, run `make gen` to update .github/workflows/Test.yml.
+ci_test_groups:
+  - group: default
+    files:
+      - 050_load_with_suggested_dependencies.tst.autogen.md
+      - AutoDocTests.tst.autogen.md
+      - add_hom_structure_using_external_hom.tst.autogen.md
+      - adelman_category_hom_structure.tst.md

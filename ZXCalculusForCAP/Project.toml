@@ -5,10 +5,10 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's ZXCalculusForCAP v2026.07-01
+# Transpiled from GAP's ZXCalculusForCAP v2026.10-01
 version = "0.2.18"
 
-# Current dependencies of GAP's ZXCalculusForCAP v2026.07-01
+# Current dependencies of GAP's ZXCalculusForCAP v2026.10-01
 # NeededOtherPackages:
 #   CAP >= 2025.06-06
 #   MonoidalCategories >= 2023.05-03

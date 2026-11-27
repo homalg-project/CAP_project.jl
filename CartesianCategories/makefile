@@ -4,7 +4,7 @@ install:
 	julia -e 'using Pkg; Pkg.develop(path=".");'
 
 uninstall:
-	julia -e 'using Pkg; Pkg.rm("CartesianCategories");'
+	julia -e 'using Pkg; haskey(Pkg.project().dependencies, "CartesianCategories") ? Pkg.rm("CartesianCategories") : println("\033[94mCartesianCategories is not installed or already removed, skipping.\033[0m");'
 
 test:
 	julia -e 'using Pkg; Pkg.test("CartesianCategories");'

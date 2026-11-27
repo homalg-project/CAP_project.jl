@@ -6,10 +6,10 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's ModulePresentationsForCAP v2026.06-01
+# Transpiled from GAP's ModulePresentationsForCAP v2026.10-01
 version = "0.2.3"
 
-# Current dependencies of GAP's ModulePresentationsForCAP v2026.06-01
+# Current dependencies of GAP's ModulePresentationsForCAP v2026.10-01
 # NeededOtherPackages:
 #   MatricesForHomalg >= 2026.04-01
 #   CAP >= 2026.04-01

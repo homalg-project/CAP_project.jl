@@ -8,10 +8,10 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's MonoidalCategories v2026.08-02
+# Transpiled from GAP's MonoidalCategories v2026.10-01
 version = "0.3.3"
 
-# Current dependencies of GAP's MonoidalCategories v2026.08-02
+# Current dependencies of GAP's MonoidalCategories v2026.10-01
 # NeededOtherPackages:
 #   ToolsForHomalg >= 2018.05.22
 #   CAP >= 2026.06-01

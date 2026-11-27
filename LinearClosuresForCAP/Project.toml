@@ -6,10 +6,10 @@ authors = [
 	"Fabian Zickgraf <f.zickgraf@dashdos.com>"
 ]
 
-# Transpiled from GAP's LinearClosuresForCAP v2026.06-02
+# Transpiled from GAP's LinearClosuresForCAP v2026.10-01
 version = "0.2.4"
 
-# Current dependencies of GAP's LinearClosuresForCAP v2026.06-02
+# Current dependencies of GAP's LinearClosuresForCAP v2026.10-01
 # NeededOtherPackages:
 #   CAP >= 2026.04-01
 #   GroupsAsCategoriesForCAP >= 2025.07-01

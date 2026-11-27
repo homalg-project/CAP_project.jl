@@ -4,7 +4,7 @@ install:
 	julia -e 'using Pkg; Pkg.develop(path=".");'
 
 uninstall:
-	julia -e 'using Pkg; Pkg.rm("FreydCategoriesForCAP");'
+	julia -e 'using Pkg; haskey(Pkg.project().dependencies, "FreydCategoriesForCAP") ? Pkg.rm("FreydCategoriesForCAP") : println("\033[94mFreydCategoriesForCAP is not installed or already removed, skipping.\033[0m");'
 
 test:
 	julia -e 'using Pkg; Pkg.test("FreydCategoriesForCAP");'
